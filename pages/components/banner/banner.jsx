@@ -5,5 +5,5 @@ const Banner = () => {
     <div className={styles.test}>Banner</div>
   )
 }
-
+ 
 export default Banner
