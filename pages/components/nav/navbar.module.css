@@ -88,7 +88,7 @@
 
   box-shadow: var(--shadow30, 0 0 #0000), var(--ring-shadow, 0 0 #0000),
     var(--shadow30);
-  top: 0.5rem;
+  top: 1.2rem;
 }
 
 .linkName {
