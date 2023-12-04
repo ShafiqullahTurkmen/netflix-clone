@@ -40,3 +40,12 @@
 
   max-width: 100%;
 }
+
+.imgMotionWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.imgMotionWrapper:hover {
+  z-index: 99;
+}
