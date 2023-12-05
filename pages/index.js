@@ -4,8 +4,28 @@ import styles from "@/styles/Home.module.css";
 import Banner from "./components/banner/banner";
 import Navbar from "./components/nav/navbar";
 import Card from "./components/card/card";
+import SectionCard from "./components/card/section-cards";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const disneyVideos = [
+  {
+    imgUrl: "/static/clifford.webp",
+    id: 0
+  },
+  {
+    imgUrl: "/static/clifford.webp",
+    id: 1
+  },
+  {
+    imgUrl: "/static/clifford.webp",
+    id: 2
+  },
+  {
+    imgUrl: "/static/clifford.webp",
+    id: 3
+  },
+]
 
 export default function Home() {
   return (
@@ -24,9 +44,11 @@ export default function Home() {
         imgUrl="/static/clifford.webp"
       />
 
-      <Card imgUrl="/static/clifford.webp" size="large" />
-      <Card imgUrl="/static/clifford.webp" size="medium" />
-      <Card imgUrl="/static/clifford.webp" size="small" />
+      <div className={styles.sectionWrapper}>
+        <SectionCard title="Disney" videos={disneyVideos} size="large"/>
+        <SectionCard title="Productivity" videos={disneyVideos} size="medium"/>
+      </div>
+
     </div>
   );
 }
