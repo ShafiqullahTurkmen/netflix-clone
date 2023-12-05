@@ -6,8 +6,8 @@ const SectionCard = ({ title="Disney", videos, size="large" }) => {
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.cardWrapper}>
       {
-        videos.map(({imgUrl, id}, ) => (
-          <Card imgUrl={imgUrl} size={size} id={id} key={id} />
+        videos?.map(({imgUrl, id}, i) => (
+          <Card imgUrl={imgUrl} size={size} id={i} key={id} />
         ))
       }
  

@@ -3,31 +3,15 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Banner from "./components/banner/banner";
 import Navbar from "./components/nav/navbar";
-import Card from "./components/card/card";
 import SectionCard from "./components/card/section-cards";
+import { getVideos } from '../lib/videos';
 
 const inter = Inter({ subsets: ["latin"] });
 
-const disneyVideos = [
-  {
-    imgUrl: "/static/clifford.webp",
-    id: 0
-  },
-  {
-    imgUrl: "/static/clifford.webp",
-    id: 1
-  },
-  {
-    imgUrl: "/static/clifford.webp",
-    id: 2
-  },
-  {
-    imgUrl: "/static/clifford.webp",
-    id: 3
-  },
-]
+
 
 export default function Home() {
+  const disneyVideos = getVideos();
   return (
     <div className={styles.container}>
       <Head>
