@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const defaultImage =
   "https://images.unsplash.com/photo-1682687982107-14492010e05e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
-const Card = ({ imgUrl = defaultImage, size = "medium", id, key }) => {
+const Card = ({ imgUrl = defaultImage, size = "medium", id }) => {
   const [imgSrc, setImgSrc] = useState(imgUrl);
 
   const classMap = {

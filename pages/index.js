@@ -1,17 +1,21 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Banner from "./components/banner/banner";
 import Navbar from "./components/nav/navbar";
 import SectionCard from "./components/card/section-cards";
 import { getVideos } from '../lib/videos';
 
-const inter = Inter({ subsets: ["latin"] });
-
-
-
-export default function Home() {
+export async function getServerSideProps () {
   const disneyVideos = getVideos();
+
+  return {
+    props: {
+      disneyVideos
+    }
+  }
+}
+
+export default function Home({ disneyVideos }) {
   return (
     <div className={styles.container}>
       <Head>
