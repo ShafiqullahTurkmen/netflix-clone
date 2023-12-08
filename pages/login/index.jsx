@@ -15,7 +15,7 @@ const Login = () => {
         <title>Netflix SignIn</title>
       </Head>
 
-      <header>
+      <header className={styles.header}>
         <div className={styles.headerWrapper}>
           <Link href="/" className={styles.logoLink}>
             <div className={styles.logoWrapper}>
@@ -28,24 +28,24 @@ const Login = () => {
             </div>
           </Link>
         </div>
-
-        <main className={styles.main}>
-          <div className={styles.mainWrapper}>
-            <h1 className={styles.signinHeader}>Sign In</h1>
-
-            <input
-              type="text"
-              placeholder="Email address"
-              className={styles.emailInput}
-            />
-
-            <p className={styles.userMsg}></p>
-            <button onClick={handleLoginWithEmail} className={styles.loginBtn}>
-              Sign In
-            </button>
-          </div>
-        </main>
       </header>
+
+      <main className={styles.main}>
+        <div className={styles.mainWrapper}>
+          <h1 className={styles.signinHeader}>Sign In</h1>
+
+          <input
+            type="text"
+            placeholder="Email address"
+            className={styles.emailInput}
+          />
+
+          <p className={styles.userMsg}></p>
+          <button onClick={handleLoginWithEmail} className={styles.loginBtn}>
+            Sign In
+          </button>
+        </div>
+      </main>
     </div>
   );
 };
