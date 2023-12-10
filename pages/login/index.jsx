@@ -3,24 +3,37 @@ import styles from "./index.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { magic } from "@/lib/magic-client";
 
 const Login = () => {
 
   const [email, setEmail] = useState("");
   const [userMsg, setUserMsg] = useState("");
+  const router = useRouter();
   const handleOnChangeEmail = (e) => {
     setUserMsg("");
-    console.log("event", e);
     const email = e.target.value;
     setEmail(email);
   };
 
-  const handleLoginWithEmail = (e) => {
+  const handleLoginWithEmail = async (e) => {
     e.preventDefault();
-    console.log("it worksssssssssssss");
 
     if (email) {
-      // route to dashboard
+
+      // log in a user by their email
+      try {
+        const didToken = await magic.auth.loginWithEmailOTP({ email });
+      } catch(e) {
+        // Handle errors if required!
+        console.error(e);
+        console.log("Something went wrong");
+      }
+
+
+
+      // router.push("/");
     } else {
       // show user message
       setUserMsg("Enter a valid email address");

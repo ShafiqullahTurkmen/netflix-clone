@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "framer-motion": "^6.3.13",
+    "magic-sdk": "^21.3.1",
     "next": "13.5.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"
