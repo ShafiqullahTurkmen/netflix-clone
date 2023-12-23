@@ -13,8 +13,6 @@ const SectionCard = ({ title="Disney", videos=[], size="large" }) => {
           </Link>
         ))
       }
- 
-     
       </div>
     </section>
   );
