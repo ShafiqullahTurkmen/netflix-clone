@@ -19,12 +19,11 @@ const Card = ({ imgUrl = defaultImage, size = "medium", id }) => {
     setImgSrc(defaultImage);
   };
 
-  const scale = id === 0 ? { scaleY: 1.1 } : { scale: 1.1 };
   return (
     <div className={styles.container}>
       <motion.div
         className={`${classMap[size]} ${styles.imgMotionWrapper}`}
-        whileHover={...scale}
+        whileHover={ id === 0 ? { scaleY: 1.1 } : { scale: 1.1 } }
       >
         <Image
           src={imgSrc}
