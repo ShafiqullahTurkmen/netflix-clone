@@ -4,6 +4,7 @@ import Banner from "./components/banner/banner";
 import Navbar from "./components/nav/navbar";
 import SectionCard from "./components/card/section-cards";
 import { getVideos, getPopularVideos } from '../lib/videos';
+import { startFetchMyQuery } from '../lib/db/hasura';
 
 export async function getServerSideProps () {
   const disneyVideos = await getVideos("disney trailer");
@@ -22,6 +23,7 @@ export async function getServerSideProps () {
 }
 
 export default function Home({ disneyVideos, productivityVideos, travelVideos, popularVideos }) {
+  startFetchMyQuery();
   return (
     <div className={styles.container}>
       <Head>
@@ -41,10 +43,10 @@ export default function Home({ disneyVideos, productivityVideos, travelVideos, p
         />
 
         <div className={styles.sectionWrapper}>
-          <SectionCard title="Disney" videos={disneyVideos} size="large"/>
-          <SectionCard title="Travel" videos={travelVideos} size="small"/>
-          <SectionCard title="Productivity" videos={productivityVideos} size="medium"/>
-          <SectionCard title="Popular" videos={popularVideos} size="small"/>
+          <SectionCard key="Disney" title="Disney" videos={disneyVideos} size="large"/>
+          <SectionCard key="Travel" title="Travel" videos={travelVideos} size="small"/>
+          <SectionCard key="Productivity" title="Productivity" videos={productivityVideos} size="medium"/>
+          <SectionCard key="Popular" title="Popular" videos={popularVideos} size="small"/>
         </div>
       </div>
     </div>

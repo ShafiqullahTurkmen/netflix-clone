@@ -8,8 +8,8 @@ const SectionCard = ({ title="Disney", videos=[], size="large" }) => {
       <div className={styles.cardWrapper}>
       {
         videos?.map(({imgUrl, id}, i) => (
-          <Link href={`/video/${id}`}>
-            <Card imgUrl={imgUrl} size={size} id={i} key={id || i} />
+          <Link href={`/video/${id}`} key={id}>
+            <Card imgUrl={imgUrl} size={size} id={i}/>
           </Link>
         ))
       }
