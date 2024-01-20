@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { magic } from "@/lib/magic-client";
 
-// const getMetaData = async () => await magic.user.getInfo();
-
 const Navbar = () =>  {
   const [showDropDown, setShowDropDown] = useState(false);
   const [userName, setUserName] = useState("");
@@ -17,7 +15,6 @@ const Navbar = () =>  {
       try {
         const { email } = await magic.user.getInfo();
         if (email) {
-          console.log(email);
           setUserName(email);
         }
       } catch (error) {
