@@ -5,7 +5,7 @@ import { getYoutubeVideoById } from "@/lib/videos";
 import Navbar from "../components/nav/navbar";
 import Like from "../components/icons/like-icon";
 import DisLike from "../components/icons/dislike-icon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 Modal.setAppElement("#__next");
 
@@ -24,16 +24,62 @@ const Video = ({
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleDisLike, setToggleDisLike] = useState(false);
 
+  useEffect(() => {
+    const handleLikeDislikeService = async () => {
+      const response = await fetch(`/api/stats?videoId=${videoId}`, {
+        method: "GET",
+      });
+      const {findVideo:data} = await response.json();
+
+      if (data.length > 0) {
+        debugger
+        const favourited = data[0].favourited;
+        if (favourited === 1) {
+          setToggleLike(true);
+        } else if (favourited === 0) {
+          setToggleDisLike(true);
+        }
+      }
+    };
+    handleLikeDislikeService();
+  }, [videoId]);
+
+
+  const runRatingService = async (favourited) => {
+    return await fetch("/api/stats", {
+      method: "POST",
+      body: JSON.stringify({
+        videoId,
+        favourited,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+
   const handleToggleDislike = async () => {
     console.log("handleToggleDislike");
     setToggleDisLike(!toggleDisLike);
-    setToggleLike(false);
+    setToggleLike(toggleDisLike);
+
+    const val = !toggleDisLike;
+    const favourited = val ? 0 : 1;
+    const response = await runRatingService(favourited);
+    console.log("data", await response.json());
   };
 
   const handleToggleLike = async () => {
     console.log("handleToggleLike");
     setToggleLike(!toggleLike);
-    setToggleDisLike(false);
+    setToggleDisLike(toggleLike);
+
+    
+    const val = !toggleLike;
+    const favourited = val ? 1 : 0;
+    const response = await runRatingService(favourited);
+    console.log("data", await response.json());
   };
 
   return (
