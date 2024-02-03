@@ -3,9 +3,23 @@ import styles from "@/styles/Home.module.css";
 import Banner from "./components/banner/banner";
 import Navbar from "./components/nav/navbar";
 import SectionCard from "./components/card/section-cards";
-import { getVideos, getPopularVideos } from '../lib/videos';
+import { getVideos, getPopularVideos, getWatchItAgainVideos } from '../lib/videos';
+import { redirectUser } from "@/lib/utils";
 
-export async function getServerSideProps () {
+export async function getServerSideProps (context) {
+  const { userId, token } = await redirectUser(context);
+
+  if (!userId) {
+    return {
+      props: {},
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const watchItAgainVideos = await getWatchItAgainVideos(userId, token);
   const disneyVideos = await getVideos("disney trailer");
   const travelVideos = await getVideos("Traver");
   const productivityVideos = await getVideos("Productivity");
@@ -16,12 +30,13 @@ export async function getServerSideProps () {
       disneyVideos,
       travelVideos,
       productivityVideos,
-      popularVideos
+      popularVideos,
+      watchItAgainVideos
     }
   }
 }
 
-export default function Home({ disneyVideos, productivityVideos, travelVideos, popularVideos }) {
+export default function Home({ disneyVideos, productivityVideos, travelVideos, popularVideos, watchItAgainVideos }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -42,6 +57,7 @@ export default function Home({ disneyVideos, productivityVideos, travelVideos, p
 
         <div className={styles.sectionWrapper}>
           <SectionCard key="Disney" title="Disney" videos={disneyVideos} size="large"/>
+          <SectionCard key="Disney" title="Watch it again" videos={watchItAgainVideos} size="small"/>
           <SectionCard key="Travel" title="Travel" videos={travelVideos} size="small"/>
           <SectionCard key="Productivity" title="Productivity" videos={productivityVideos} size="medium"/>
           <SectionCard key="Popular" title="Popular" videos={popularVideos} size="small"/>

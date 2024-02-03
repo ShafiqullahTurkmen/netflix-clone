@@ -4,6 +4,7 @@ import {
   insertStats,
   updateStats,
 } from "../../lib/db/hasura";
+import { verifyToken } from "../../lib/utils";
 
 export default async function Stats(req, res) {
   try {
@@ -16,8 +17,7 @@ export default async function Stats(req, res) {
     if (!videoId) return res.status(400).json({ message: "Missing params!" });
     if(req.method === "POST" && !([0,1].includes(favourited))) return res.status(400).json({message: "missing body!"})
 
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decodedToken.issuer;
+    const userId = await verifyToken(token);
 
     const findVideo = await findVideoIdByUser(token, userId, videoId);
     const isStatsExist = findVideo?.length > 0;

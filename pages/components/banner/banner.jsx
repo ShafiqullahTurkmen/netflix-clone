@@ -7,7 +7,6 @@ const Banner = ({ title, subTitle, imgUrl, videoId }) => {
 
   const handleOnPlay = (e) => {
     e.preventDefault();
-    console.log("Button clicked");
     router.push(`/video/${videoId}`);
   };
 
