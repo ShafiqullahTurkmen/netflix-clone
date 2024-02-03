@@ -8,6 +8,7 @@ import { magic } from "@/lib/magic-client";
 const Navbar = () =>  {
   const [showDropDown, setShowDropDown] = useState(false);
   const [userName, setUserName] = useState("");
+  const [didToken, setDidToken] = useState("");
   const router = useRouter();
   
   useEffect(() => {
@@ -41,8 +42,17 @@ const Navbar = () =>  {
   const handleSignOut = async (e) => {
     try {
       e.preventDefault();
-      await magic.user.logout();
-      router.push("/login")
+      // await magic.user.logout();
+      // router.push("/login")
+      const response = await fetch("/api/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${didToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const res = await response.json();
     } catch (error) {
       console.log(error.message);
       console.error(error);
